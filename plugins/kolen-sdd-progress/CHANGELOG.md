@@ -2,6 +2,13 @@
 
 All notable changes to this plugin are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the plugin uses [Semantic Versioning](https://semver.org/).
 
+## [0.4.0] - 2026-10-25
+
+### Changed
+
+- User-level schemas are read from the new `userSchemasDir` option instead of the `HOME`, `LOCALAPPDATA` and `XDG_DATA_HOME` variables; the mod no longer reads environment variables.
+- README documents every hook and what it does.
+
 ## [0.3.0] - 2026-10-25
 
 ### Changed

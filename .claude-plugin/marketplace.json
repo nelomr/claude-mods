@@ -10,7 +10,7 @@
       "name": "kolen-sdd-progress",
       "source": "./plugins/kolen-sdd-progress",
       "description": "Pane with the task progress of each open OpenSpec change, read locally from tasks.md",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "author": {
         "name": "nelomr"
       },

@@ -1,6 +1,6 @@
 {
   "name": "kolen-sdd-progress",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Pane with the task progress of each open OpenSpec change, read locally from tasks.md",
   "author": {
     "name": "nelomr",
@@ -46,6 +46,13 @@
       "title": "Progress file",
       "description": "File in each change folder whose last '## ' heading is shown as the last activity. Empty disables it.",
       "default": "apply-progress.md",
+      "required": false
+    },
+    "userSchemasDir": {
+      "type": "string",
+      "title": "User schemas folder",
+      "description": "Absolute path of the OpenSpec user schemas folder (for example ~/.local/share/openspec/schemas expanded). Empty skips user-level schemas.",
+      "default": "",
       "required": false
     }
   }

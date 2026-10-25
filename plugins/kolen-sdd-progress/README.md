@@ -8,7 +8,7 @@
 
 Every open **OpenSpec** change in a pane beside the conversation: **per-phase progress**, **next task**, **missing artifacts**, **open questions** and **gate blockers**, read straight from the change files.
 
-[![Version](https://img.shields.io/badge/Version-0.3.0-2563EB?style=for-the-badge)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.4.0-2563EB?style=for-the-badge)](./CHANGELOG.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-%E2%89%A52.1.275-D97757?style=for-the-badge&logo=claude&logoColor=white)](https://docs.claude.com/en/docs/claude-code)
 [![OpenSpec](https://img.shields.io/badge/OpenSpec-1.14.x-15803D?style=for-the-badge)](https://github.com/Fission-AI/OpenSpec)
 [![Model calls](https://img.shields.io/badge/Model_calls-0-52525B?style=for-the-badge)](#privacy-and-cost)
@@ -53,7 +53,7 @@ It follows the rules of the OpenSpec CLI (checked against 1.14.x), so its counts
 | Root | The nearest folder at or above the working directory that holds `openspec/changes` or `openspec/specs` |
 | Changes | Every folder in `openspec/changes/` except `archive` and dot folders; a folder that only wraps nested changes is reported, not read |
 | Schema | `schema` of the change's `.openspec.yaml`, else of `openspec/config.yaml`, else `spec-driven` |
-| Schema file | `openspec/schemas/<name>/schema.yaml`, then the user schemas folder (`$XDG_DATA_HOME/openspec`, `%LOCALAPPDATA%\openspec` or `~/.local/share/openspec`), then `node_modules/@fission-ai/openspec/schemas` |
+| Schema file | `openspec/schemas/<name>/schema.yaml`, then the user schemas folder set in the `userSchemasDir` option (skipped when empty), then `node_modules/@fission-ai/openspec/schemas` |
 | Task files | The artifact whose `generates` equals `apply.tracks` (else the artifact with id `tasks`); globs such as `plan/**/*.md` are supported, dot files excluded |
 | Task lines | Any list marker (`-`, `*`, `+`, `1.`, `1)`) with a one-character checkbox; only `x`/`X` is done, so `[ ]`, `[~]` and `[]` count as pending |
 | Artifacts | Every artifact of the schema, present when its `generates` matches a file |
@@ -81,6 +81,7 @@ These are not part of OpenSpec. Each has a default and can be changed or disable
 | `gatePattern` | `mandatory gate\|^0\.\s*gates?\b` | A matching phase with pending tasks that names another open change marks the card as blocked by it |
 | `unverifiedMarker` | `UNVERIFIED` | Occurrences counted in the design artifact; empty disables it |
 | `progressFile` | `apply-progress.md` | Its last `## ` heading is shown as the last activity; empty disables it |
+| `userSchemasDir` | empty | Absolute path of your OpenSpec user schemas folder, usually `~/.local/share/openspec/schemas` expanded (`%LOCALAPPDATA%\openspec\schemas` on Windows); empty skips user-level schemas |
 
 Patterns are case-insensitive regular expressions; an empty or invalid one uses the default.
 
@@ -94,6 +95,19 @@ The pane opens when a session starts. Close it with the pane's close mark; reope
 
 It refreshes after every `Edit`, `Write`, `MultiEdit`, `NotebookEdit` and `Bash` tool call.
 
+## Hooks
+
+The mod registers four hooks and one command. This is everything it does:
+
+| Hook | When it runs | What it does |
+|---|---|---|
+| `session.start` | Once per session | Registers the `/sdd` command, reads the OpenSpec changes and opens the pane |
+| `command.run` (`/sdd`) | When you type `/sdd` | Reads the changes again, reopens the pane and replies with one line: `SDD pane opened.` |
+| `tool.call` | After every tool call | Lets the call run unchanged; after `Edit`, `Write`, `MultiEdit`, `NotebookEdit` or `Bash` it reads the changes again and shows a toast for newly ticked tasks. It never blocks, rewrites or delays a call, and a failed read leaves the call as it was |
+| `ui.render` (pane) | When the pane is drawn | Draws the cards from the session state; the pending-tasks button only toggles which card is expanded |
+
+Reading the changes means listing `openspec/changes`, reading the task, design and progress files of each change and the schema files, and stating the task files for their modification time.
+
 ## Surfaces
 
 - **Desktop and editor**: each change is an SVG card that follows the system light or dark theme, with text contrast at WCAG AA or better. The only motion is the progress bars easing in, and it is skipped under `prefers-reduced-motion`.
@@ -101,7 +115,7 @@ It refreshes after every `Edit`, `Write`, `MultiEdit`, `NotebookEdit` and `Bash`
 
 ## Privacy and cost
 
-- Reads local files only: the OpenSpec folder of the project, schema files, and the `HOME`, `LOCALAPPDATA` and `XDG_DATA_HOME` variables to find user schemas. No network access, no file writes, no processes.
+- Reads local files only: the OpenSpec folder of the project and the schema files above. It reads no environment variables and no credentials. No network access, no file writes, no processes.
 - Makes no model calls and adds nothing to the system prompt or the conversation, apart from the one-line reply of `/sdd`.
 - Keeps its state in the session; nothing is stored across sessions.
 

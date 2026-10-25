@@ -34,7 +34,7 @@ const MAX_DEPTH = 8
 const MAX_FILES = 2000
 const PACKAGE_SCHEMAS = 'node_modules/@fission-ai/openspec/schemas'
 
-type Settings = { conventions: Conventions; progressFile: string }
+type Settings = { conventions: Conventions; progressFile: string; userSchemasDir: string }
 
 function settingsFrom(options: PluginOptions): Settings {
   const marker = options.unverifiedMarker
@@ -46,6 +46,7 @@ function settingsFrom(options: PluginOptions): Settings {
       unverified: typeof marker === 'string' ? marker.trim() : DEFAULT_CONVENTIONS.unverified,
     },
     progressFile: typeof progress === 'string' ? progress.trim() : 'apply-progress.md',
+    userSchemasDir: typeof options.userSchemasDir === 'string' ? options.userSchemasDir.trim().replace(/[\\/]+$/, '') : '',
   }
 }
 
@@ -182,28 +183,19 @@ async function listFiles($: EngineInterface, base: string): Promise<string[]> {
   return files
 }
 
-// The user data folder OpenSpec reads user schemas from (XDG_DATA_HOME, LOCALAPPDATA or ~/.local/share).
-async function userDataDir($: EngineInterface): Promise<string | undefined> {
-  const xdg = await $.env.get('XDG_DATA_HOME')
-  if (xdg) return `${xdg}/openspec`
-  const local = await $.env.get('LOCALAPPDATA')
-  if (local) return `${local}/openspec`
-  const home = await $.env.get('HOME')
-  return home ? `${home}/.local/share/openspec` : undefined
-}
-
 // Project schema, then user schema, then the package built-in, as OpenSpec's resolver orders them.
+// The user schemas folder comes from the plugin options, never from the environment.
 async function resolveSchema(
   $: EngineInterface,
   root: string,
   name: string,
+  userSchemasDir: string,
   cache: Map<string, SchemaInfo | undefined>,
 ): Promise<SchemaInfo | undefined> {
   if (cache.has(name)) return cache.get(name)
-  const userDir = await userDataDir($)
   const candidates = [
     `${root}/openspec/schemas/${name}/schema.yaml`,
-    ...(userDir ? [`${userDir}/schemas/${name}/schema.yaml`] : []),
+    ...(userSchemasDir ? [`${userSchemasDir}/${name}/schema.yaml`] : []),
     `${root}/${PACKAGE_SCHEMAS}/${name}/schema.yaml`,
   ]
   let schema: SchemaInfo | undefined
@@ -243,7 +235,7 @@ async function scan($: EngineInterface, settings: Settings): Promise<ScanResult>
     }
     const warnings: string[] = []
     const schemaName = (metadata ? yamlScalar(metadata, 'schema') : undefined) ?? projectSchema ?? SPEC_DRIVEN.name
-    const schema = await resolveSchema($, root, schemaName, cache)
+    const schema = await resolveSchema($, root, schemaName, settings.userSchemasDir, cache)
     let taskPaths: string[]
     if (schema === undefined) {
       warnings.push(`Schema "${schemaName}" not found; reading tasks.md`)
@@ -286,6 +278,10 @@ async function scan($: EngineInterface, settings: Settings): Promise<ScanResult>
     )
   }
   return { root, changes: found.sort((a, b) => a.name.localeCompare(b.name)), notices }
+}
+
+async function toggleExpanded($: EngineInterface, name: string): Promise<void> {
+  await update($, expanded, value => (value === name ? '' : name))
 }
 
 async function refresh($: EngineInterface, settings: Settings, shouldAnnounce: boolean): Promise<void> {
@@ -427,7 +423,7 @@ export const register: Register = (on, options) => {
                   key={`toggle-${change.name}`}
                   plain
                   onPress={() => {
-                    void update($, expanded, value => (value === change.name ? '' : change.name))
+                    void toggleExpanded($, change.name)
                   }}
                 >
                   {isOpen ? '▾ Hide pending' : `▸ Pending in current phase (${pending.length})`}
