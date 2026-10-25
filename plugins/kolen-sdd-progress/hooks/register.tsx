@@ -16,11 +16,11 @@ import {
   yamlScalar,
 } from './parse'
 
-const PANE = 'sdd-progress'
+const PANE = 'kolen-sdd-progress'
 const EMPTY: ScanResult = { root: undefined, changes: [], notices: [] }
-const scanState = atom({ plugin: 'sdd-progress', key: 'scan' } as const, EMPTY)
-const scannedAt = atom({ plugin: 'sdd-progress', key: 'scannedAt' } as const, 0)
-const expanded = atom({ plugin: 'sdd-progress', key: 'expanded' } as const, '')
+const scanState = atom({ plugin: 'kolen-sdd-progress', key: 'scan' } as const, EMPTY)
+const scannedAt = atom({ plugin: 'kolen-sdd-progress', key: 'scannedAt' } as const, 0)
+const expanded = atom({ plugin: 'kolen-sdd-progress', key: 'expanded' } as const, '')
 const WRITERS = new Set(['Edit', 'Write', 'MultiEdit', 'NotebookEdit', 'Bash'])
 
 const CARD_W = 520

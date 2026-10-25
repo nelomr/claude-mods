@@ -7,15 +7,15 @@
   "description": "Personal Claude Code mods",
   "plugins": [
     {
-      "name": "sdd-progress",
-      "source": "./plugins/sdd-progress",
+      "name": "kolen-sdd-progress",
+      "source": "./plugins/kolen-sdd-progress",
       "description": "Pane with the task progress of each open OpenSpec change, read locally from tasks.md",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": {
         "name": "nelomr"
       },
       "license": "MIT",
-      "homepage": "https://github.com/nelomr/claude-mods/tree/main/plugins/sdd-progress",
+      "homepage": "https://github.com/nelomr/claude-mods/tree/main/plugins/kolen-sdd-progress",
       "keywords": [
         "openspec",
         "sdd",

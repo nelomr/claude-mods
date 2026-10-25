@@ -33,13 +33,13 @@ A collection of **local-first**, **zero-token** Claude Code mods for **spec-driv
 <table>
   <tr>
     <td width="96" align="center" valign="top">
-      <img src="plugins/sdd-progress/assets/icon.png" width="64" height="64" alt="sdd-progress icon">
+      <img src="plugins/kolen-sdd-progress/assets/icon.png" width="64" height="64" alt="kolen-sdd-progress icon">
     </td>
     <td valign="top">
-      <h3><a href="plugins/sdd-progress">sdd-progress</a> <sub><code>v0.2.0</code></sub></h3>
+      <h3><a href="plugins/kolen-sdd-progress">kolen-sdd-progress</a> <sub><code>v0.3.0</code></sub></h3>
       A pane beside the conversation with the live progress of every open <a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a> change: per-phase task bars, next task, missing artifacts, open questions and gate blockers. Counts match <code>openspec list</code>, custom schemas and <code>apply.tracks</code> included.
       <br><br>
-      <code>sdd-progress@kolen-plugins</code>
+      <code>kolen-sdd-progress@kolen-plugins</code>
     </td>
   </tr>
 </table>
@@ -50,13 +50,13 @@ Add the marketplace once, then install any plugin from it:
 
 ```bash
 claude plugin marketplace add nelomr/claude-mods
-claude plugin install sdd-progress@kolen-plugins
+claude plugin install kolen-sdd-progress@kolen-plugins
 ```
 
 Or in one step from inside Claude Code:
 
 ```
-/plugin install sdd-progress --marketplace nelomr/claude-mods
+/plugin install kolen-sdd-progress --marketplace nelomr/claude-mods
 ```
 
 Keep them current:

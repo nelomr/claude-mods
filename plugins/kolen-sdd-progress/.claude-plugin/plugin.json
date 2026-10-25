@@ -1,12 +1,12 @@
 {
-  "name": "sdd-progress",
-  "version": "0.2.0",
+  "name": "kolen-sdd-progress",
+  "version": "0.3.0",
   "description": "Pane with the task progress of each open OpenSpec change, read locally from tasks.md",
   "author": {
     "name": "nelomr",
     "url": "https://github.com/nelomr"
   },
-  "homepage": "https://github.com/nelomr/claude-mods/tree/main/plugins/sdd-progress",
+  "homepage": "https://github.com/nelomr/claude-mods/tree/main/plugins/kolen-sdd-progress",
   "repository": "https://github.com/nelomr/claude-mods",
   "license": "MIT",
   "keywords": [

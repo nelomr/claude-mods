@@ -1,14 +1,14 @@
 <div align="center">
 
-<img src="assets/icon.png" width="96" height="96" alt="sdd-progress icon">
+<img src="assets/icon.png" width="96" height="96" alt="kolen-sdd-progress icon">
 
-# sdd-progress
+# kolen-sdd-progress
 
 ### Live OpenSpec Progress Pane for Claude Code
 
 Every open **OpenSpec** change in a pane beside the conversation: **per-phase progress**, **next task**, **missing artifacts**, **open questions** and **gate blockers**, read straight from the change files.
 
-[![Version](https://img.shields.io/badge/Version-0.2.0-2563EB?style=for-the-badge)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.3.0-2563EB?style=for-the-badge)](./CHANGELOG.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-%E2%89%A52.1.275-D97757?style=for-the-badge&logo=claude&logoColor=white)](https://docs.claude.com/en/docs/claude-code)
 [![OpenSpec](https://img.shields.io/badge/OpenSpec-1.14.x-15803D?style=for-the-badge)](https://github.com/Fission-AI/OpenSpec)
 [![Model calls](https://img.shields.io/badge/Model_calls-0-52525B?style=for-the-badge)](#privacy-and-cost)
@@ -32,14 +32,14 @@ Every open **OpenSpec** change in a pane beside the conversation: **per-phase pr
 ## Install
 
 ```
-/plugin install sdd-progress --marketplace nelomr/claude-mods
+/plugin install kolen-sdd-progress --marketplace nelomr/claude-mods
 ```
 
 Or from a terminal:
 
 ```bash
 claude plugin marketplace add nelomr/claude-mods
-claude plugin install sdd-progress@kolen-plugins
+claude plugin install kolen-sdd-progress@kolen-plugins
 ```
 
 Requires Claude Code 2.1.275 or later.

@@ -39,6 +39,6 @@ export type ScanResult = {
 
 declare module 'claude-code' {
   interface PluginState {
-    'sdd-progress': { scan: ScanResult; scannedAt: number; expanded: string }
+    'kolen-sdd-progress': { scan: ScanResult; scannedAt: number; expanded: string }
   }
 }
