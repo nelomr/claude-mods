@@ -1,0 +1,52 @@
+{
+  "name": "sdd-progress",
+  "version": "0.2.0",
+  "description": "Pane with the task progress of each open OpenSpec change, read locally from tasks.md",
+  "author": {
+    "name": "nelomr",
+    "url": "https://github.com/nelomr"
+  },
+  "homepage": "https://github.com/nelomr/claude-mods/tree/main/plugins/sdd-progress",
+  "repository": "https://github.com/nelomr/claude-mods",
+  "license": "MIT",
+  "keywords": [
+    "openspec",
+    "sdd",
+    "spec-driven-development",
+    "tasks",
+    "progress",
+    "pane"
+  ],
+  "icon": "./assets/icon.png",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "operatorPattern": {
+      "type": "string",
+      "title": "Operator phase pattern",
+      "description": "Case-insensitive regular expression; a tasks.md phase heading that matches it counts as operator work. Empty uses the default.",
+      "default": "runbook|\\(operator\\b|operator-only tasks|agents never run",
+      "required": false
+    },
+    "gatePattern": {
+      "type": "string",
+      "title": "Gate phase pattern",
+      "description": "Case-insensitive regular expression; a matching phase with pending tasks that names another open change marks this change as blocked. Empty uses the default.",
+      "default": "mandatory gate|^0\\.\\s*gates?\\b",
+      "required": false
+    },
+    "unverifiedMarker": {
+      "type": "string",
+      "title": "Unverified marker",
+      "description": "Literal text counted in the design artifact. Empty disables the count.",
+      "default": "UNVERIFIED",
+      "required": false
+    },
+    "progressFile": {
+      "type": "string",
+      "title": "Progress file",
+      "description": "File in each change folder whose last '## ' heading is shown as the last activity. Empty disables it.",
+      "default": "apply-progress.md",
+      "required": false
+    }
+  }
+}
