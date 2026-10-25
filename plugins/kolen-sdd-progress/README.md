@@ -8,7 +8,7 @@
 
 Every open **OpenSpec** change in a pane beside the conversation: **per-phase progress**, **next task**, **missing artifacts**, **open questions** and **gate blockers**, read straight from the change files.
 
-[![Version](https://img.shields.io/badge/Version-0.4.0-2563EB?style=for-the-badge)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.4.1-2563EB?style=for-the-badge)](./CHANGELOG.md)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-%E2%89%A52.1.275-D97757?style=for-the-badge&logo=claude&logoColor=white)](https://docs.claude.com/en/docs/claude-code)
 [![OpenSpec](https://img.shields.io/badge/OpenSpec-1.14.x-15803D?style=for-the-badge)](https://github.com/Fission-AI/OpenSpec)
 [![Model calls](https://img.shields.io/badge/Model_calls-0-52525B?style=for-the-badge)](#privacy-and-cost)
@@ -102,7 +102,7 @@ The mod registers four hooks and one command. This is everything it does:
 | Hook | When it runs | What it does |
 |---|---|---|
 | `session.start` | Once per session | Registers the `/sdd` command, reads the OpenSpec changes and opens the pane |
-| `command.run` (`/sdd`) | When you type `/sdd` | Reads the changes again, reopens the pane and replies with one line: `SDD pane opened.` |
+| `command.run` (`/sdd`) | When you type `/sdd` | Matches only the mod's own `/sdd` command, so it never sees or changes any other command. It reads the changes again, reopens the pane and replies with one line: `SDD pane opened.` |
 | `tool.call` | After every tool call | Lets the call run unchanged; after `Edit`, `Write`, `MultiEdit`, `NotebookEdit` or `Bash` it reads the changes again and shows a toast for newly ticked tasks. It never blocks, rewrites or delays a call, and a failed read leaves the call as it was |
 | `ui.render` (pane) | When the pane is drawn | Draws the cards from the session state; the pending-tasks button only toggles which card is expanded |
 

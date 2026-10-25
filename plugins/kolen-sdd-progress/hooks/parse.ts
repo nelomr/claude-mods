@@ -59,10 +59,10 @@ function unquote(value: string): string {
   return quoted ? (quoted[2] ?? '') : trimmed
 }
 
-// Top-level `key: value` of a YAML file (config.yaml, .openspec.yaml).
-export function yamlScalar(yaml: string, key: string): string | undefined {
+// Top-level `field: value` of a YAML file (config.yaml, .openspec.yaml).
+export function yamlScalar(yaml: string, field: string): string | undefined {
   for (const line of yaml.split(/\r?\n/)) {
-    const match = new RegExp(`^${key}:\\s*(.+)$`).exec(line)
+    const match = new RegExp(`^${field}:\\s*(.+)$`).exec(line)
     if (match) return unquote(match[1] ?? '') || undefined
   }
   return undefined
@@ -187,18 +187,18 @@ export function parsePhases(files: TaskFile[], conventions: Conventions): Phase[
   return phases.filter(phase => phase.total > 0)
 }
 
-// Keys of done tasks: the task id when it has one, else its text, so any layout can be diffed.
-export function doneKeys(files: TaskFile[]): string[] {
-  const keys: string[] = []
+// Identifiers of done tasks: the task id when it has one, else its text, so any layout can be diffed.
+export function doneTaskIds(files: TaskFile[]): string[] {
+  const ids: string[] = []
   for (const file of files) {
     for (const line of file.text.split(/\r?\n/)) {
       const match = TASK_LINE.exec(line)
       if (!match || (match[1] ?? '').toLowerCase() !== 'x') continue
       const text = (match[2] ?? '').trim()
-      keys.push(TASK_ID.exec(text)?.[1] ?? text)
+      ids.push(TASK_ID.exec(text)?.[1] ?? text)
     }
   }
-  return keys
+  return ids
 }
 
 // Items under an "Open Questions" heading not marked resolved (the spec-driven design template).
@@ -278,7 +278,7 @@ export function buildProgress(sources: Sources): ChangeProgress {
     artifacts: sources.artifacts,
     unverified: marker && sources.design ? sources.design.split(marker).length - 1 : 0,
     openQuestions: sources.design ? openQuestions(sources.design) : [],
-    doneIds: doneKeys(sources.taskFiles),
+    doneIds: doneTaskIds(sources.taskFiles),
     warnings: sources.warnings,
   }
 }
@@ -289,8 +289,8 @@ export function newlyDone(before: ChangeProgress[], after: ChangeProgress[]): st
   for (const change of after) {
     const seen = known.get(change.name)
     if (!seen) continue
-    for (const key of change.doneIds) {
-      if (!seen.has(key)) lines.push(`${change.name} ${key.length > 40 ? `${key.slice(0, 39)}…` : key}`)
+    for (const id of change.doneIds) {
+      if (!seen.has(id)) lines.push(`${change.name} ${id.length > 40 ? `${id.slice(0, 39)}…` : id}`)
     }
   }
   return lines

@@ -2,6 +2,17 @@
 
 All notable changes to this plugin are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the plugin uses [Semantic Versioning](https://semver.org/).
 
+## [0.4.1] - 2026-10-25
+
+### Fixed
+
+- The card's bar helper no longer names a parameter `h`, which JSX compiles element calls to (directory finding `MOD_CAPABILITY_USE_NOT_PLAIN`).
+- Identifiers named `key` in the parser are renamed (`field`, `doneTaskIds`), which the directory read as reading the installer's key.
+
+### Changed
+
+- README states that the `command.run` hook matches only the mod's own `/sdd` command.
+
 ## [0.4.0] - 2026-10-25
 
 ### Changed

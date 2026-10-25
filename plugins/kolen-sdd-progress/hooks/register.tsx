@@ -85,12 +85,12 @@ function card(change: ChangeProgress, pxW: number, marker: string): string {
   const barW = CARD_W - PAD * 2
   const isDone = change.total > 0 && ratio >= 1
   const pct = Math.round(ratio * 100)
-  const bar = (x: number, y: number, w: number, r: number, cls: string, h: number) => {
+  const bar = (x: number, y: number, w: number, r: number, cls: string, thick: number) => {
     const fill = Math.max(r > 0 ? 3 : 0, Math.round(w * r))
-    return `<rect class="k" x="${x}" y="${y}" width="${w}" height="${h}" rx="${h / 2}"/>${
+    return `<rect class="k" x="${x}" y="${y}" width="${w}" height="${thick}" rx="${thick / 2}"/>${
       fill === 0
         ? ''
-        : `<rect class="${cls}" x="${x}" y="${y}" width="${fill}" height="${h}" rx="${h / 2}"><animate attributeName="width" from="0" to="${fill}" dur="0.6s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.1 0.25 1"/></rect>`
+        : `<rect class="${cls}" x="${x}" y="${y}" width="${fill}" height="${thick}" rx="${thick / 2}"><animate attributeName="width" from="0" to="${fill}" dur="0.6s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.1 0.25 1"/></rect>`
     }`
   }
 
