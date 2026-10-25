@@ -36,7 +36,7 @@ A collection of **local-first**, **zero-token** Claude Code mods for **spec-driv
       <img src="plugins/kolen-sdd-progress/assets/icon.png" width="64" height="64" alt="kolen-sdd-progress icon">
     </td>
     <td valign="top">
-      <h3><a href="plugins/kolen-sdd-progress">kolen-sdd-progress</a> <sub><code>v0.4.1</code></sub></h3>
+      <h3><a href="plugins/kolen-sdd-progress">kolen-sdd-progress</a> <sub><code>v0.4.2</code></sub></h3>
       A pane beside the conversation with the live progress of every open <a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a> change: per-phase task bars, next task, missing artifacts, open questions and gate blockers. Counts match <code>openspec list</code>, custom schemas and <code>apply.tracks</code> included.
       <br><br>
       <code>kolen-sdd-progress@kolen-plugins</code>
