@@ -2,18 +2,31 @@
 
 # claude-mods
 
-**`kolen-plugins` — a Claude Code plugin marketplace of local-first mods for spec-driven development.**
+### Claude Code Plugin Marketplace (`kolen-plugins`)
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-2563eb?style=flat-square)](LICENSE)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-%E2%89%A5%202.1.275-18181b?style=flat-square)](https://docs.claude.com/en/docs/claude-code)
-[![Plugins](https://img.shields.io/badge/plugins-1-15803d?style=flat-square)](#plugins)
-[![No model calls](https://img.shields.io/badge/model%20calls-0-52525b?style=flat-square)](#principles)
+A collection of **local-first**, **zero-token** Claude Code mods for **spec-driven development**, built on the Claude Code hooks API and the **OpenSpec** workflow.
 
-[Plugins](#plugins) · [Quick start](#quick-start) · [Principles](#principles) · [Development](#development)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-%E2%89%A52.1.275-D97757?style=for-the-badge&logo=claude&logoColor=white)](https://docs.claude.com/en/docs/claude-code)
+[![Marketplace](https://img.shields.io/badge/Marketplace-kolen--plugins-18181B?style=for-the-badge&logo=anthropic&logoColor=white)](#plugins)
+[![Plugins](https://img.shields.io/badge/Plugins-1-2563EB?style=for-the-badge)](#plugins)
+[![OpenSpec](https://img.shields.io/badge/OpenSpec-1.14.x-15803D?style=for-the-badge)](https://github.com/Fission-AI/OpenSpec)
+[![Model calls](https://img.shields.io/badge/Model_calls-0-52525B?style=for-the-badge)](#key-highlights)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
+
+<br/>
+
+[**Plugins**](#plugins) •
+[**Quick Start**](#quick-start) •
+[**Key Highlights**](#key-highlights) •
+[**Repository Layout**](#repository-layout) •
+[**Development**](#development)
+
+---
 
 </div>
 
----
+> [!TIP]
+> **Install once, update in one command**: add the marketplace with `claude plugin marketplace add nelomr/claude-mods`, then install any plugin as `<plugin>@kolen-plugins`.
 
 ## Plugins
 
@@ -31,7 +44,7 @@
   </tr>
 </table>
 
-## Quick start
+## Quick Start
 
 Add the marketplace once, then install any plugin from it:
 
@@ -52,19 +65,40 @@ Keep them current:
 claude plugin marketplace update kolen-plugins
 ```
 
-## Principles
+## Key Highlights
 
-Every plugin here follows the same rules:
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h4>Local First</h4>
+      <p>Plugins read files on your machine only. No network access and no telemetry.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h4>Zero Token Cost</h4>
+      <p>No model calls and nothing added to the system prompt or the conversation.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h4>Read Only</h4>
+      <p>Never writes to your project, runs processes or changes settings.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top">
+      <h4>WCAG 2.1 AA Accessible</h4>
+      <p>Light and dark themes, AA contrast or better, and honours <code>prefers-reduced-motion</code>.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h4>Every Surface</h4>
+      <p>SVG cards on desktop and in the editor; themed text in the terminal.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h4>Documented &amp; Versioned</h4>
+      <p>A README, a CHANGELOG with <a href="https://semver.org/">Semantic Versioning</a> and an MIT license per plugin.</p>
+    </td>
+  </tr>
+</table>
 
-| | |
-|---|---|
-| **Local first** | Reads files on your machine. No network access, no telemetry. |
-| **Zero token cost** | No model calls and nothing added to the system prompt or the conversation. |
-| **Read only** | Never writes to your project, runs processes or changes settings. |
-| **Accessible** | Light and dark themes, WCAG AA contrast, honours reduced motion. |
-| **Documented** | A README, a CHANGELOG with [Semantic Versioning](https://semver.org/) and an MIT license per plugin. |
-
-## Repository layout
+## Repository Layout
 
 ```
 .claude-plugin/
@@ -98,4 +132,4 @@ A release:
 
 ## License
 
-[MIT](LICENSE) © 2026 nelomr
+[MIT](./LICENSE) © 2026 nelomr

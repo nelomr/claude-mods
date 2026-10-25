@@ -4,18 +4,30 @@
 
 # sdd-progress
 
-**Live progress of every open [OpenSpec](https://github.com/Fission-AI/OpenSpec) change, in a pane beside the conversation.**
+### Live OpenSpec Progress Pane for Claude Code
 
-[![Version](https://img.shields.io/badge/version-0.2.0-2563eb?style=flat-square)](CHANGELOG.md)
-[![License: MIT](https://img.shields.io/badge/license-MIT-2563eb?style=flat-square)](LICENSE)
-[![Claude Code](https://img.shields.io/badge/Claude%20Code-%E2%89%A5%202.1.275-18181b?style=flat-square)](https://docs.claude.com/en/docs/claude-code)
-[![OpenSpec](https://img.shields.io/badge/OpenSpec-1.14.x-15803d?style=flat-square)](https://github.com/Fission-AI/OpenSpec)
+Every open **OpenSpec** change in a pane beside the conversation: **per-phase progress**, **next task**, **missing artifacts**, **open questions** and **gate blockers**, read straight from the change files.
 
-[Install](#install) · [How it reads OpenSpec](#how-it-reads-openspec) · [What it shows](#what-it-shows) · [Options](#optional-conventions) · [Privacy](#privacy-and-cost)
+[![Version](https://img.shields.io/badge/Version-0.2.0-2563EB?style=for-the-badge)](./CHANGELOG.md)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-%E2%89%A52.1.275-D97757?style=for-the-badge&logo=claude&logoColor=white)](https://docs.claude.com/en/docs/claude-code)
+[![OpenSpec](https://img.shields.io/badge/OpenSpec-1.14.x-15803D?style=for-the-badge)](https://github.com/Fission-AI/OpenSpec)
+[![Model calls](https://img.shields.io/badge/Model_calls-0-52525B?style=for-the-badge)](#privacy-and-cost)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](./LICENSE)
+
+<br/>
+
+[**Install**](#install) •
+[**How It Reads OpenSpec**](#how-it-reads-openspec) •
+[**What It Shows**](#what-it-shows) •
+[**Options**](#optional-conventions) •
+[**Privacy**](#privacy-and-cost)
+
+---
 
 </div>
 
----
+> [!TIP]
+> **Counts you can trust**: tasks are read with the same rules as the OpenSpec CLI, so the pane always agrees with `openspec list`, custom schemas and `apply.tracks` included.
 
 ## Install
 
